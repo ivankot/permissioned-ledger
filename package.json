@@ -1,0 +1,28 @@
+{
+  "name": "permissioned-ledger",
+  "version": "0.1.0",
+  "description": "An alternate take on persmissioned distributed ledger (blockchain)",
+  "main": "ledger.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivankot/permissioned-ledger.git"
+  },
+  "keywords": [
+    "distributed",
+    "ledger",
+    "blockchain",
+    "chaincode"
+  ],
+  "author": "Ivan Kot (@ivankot)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ivankot/permissioned-ledger/issues"
+  },
+  "homepage": "https://github.com/ivankot/permissioned-ledger#readme",
+  "dependencies": {
+    "basic-logger": "^0.4.4"
+  }
+}
