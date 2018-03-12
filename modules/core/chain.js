@@ -1,7 +1,27 @@
+const crypto = require('crypto');
+const chainCrypto = require('./chain-crypto');
+
 module.exports = class Chain {
 
-    constructor(genesisBlock, alias, creatorPublicKey) {
+    constructor(alias, creatorPublicKey) {
         this._blocks = [];
-        this
+        this._createdTimestamp = this._updatedTimestamp = new Date().getTime();
+        this._allowedWriters = [];
+        this._allowedReaders = [];
+        this._allowedAdministrators = [];
+        this._alias = alias;
+        this._creator = creatorPublicKey;
+        this._nonce = crypto.randomBytes(32).toString('hex');
+        this._hash = this.computeHash();
     }
+
+    computeHash() {
+        return chainCrypto.hash(
+                this._alias,
+                this._createdTimestamp,
+                this._creator,
+                this._nonce
+                );
+    }
+
 }

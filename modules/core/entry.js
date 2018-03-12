@@ -1,7 +1,7 @@
 module.exports = {
     Entry: class Entry {
 
-            constructor(type, metadata, payload, signature) {
+            constructor(type, metadata, payload, signature, owner) {
                 this._type = type;
                 this._prevHash = "";
                 this._hash = "";
@@ -11,6 +11,7 @@ module.exports = {
                 this._payloadLength = payload.length;
                 this._metadata = metadata;
                 this._metadataLength = metadata.length;
+                this._owner = owner;
             }
         
             set prevHash(prevHash) {
@@ -18,7 +19,7 @@ module.exports = {
             }
         
             get hash() {
-                return new String(this._hash);
+                return this._hash;
             }
 
             get type() {
@@ -26,11 +27,15 @@ module.exports = {
             }
         
             get signature() {
-                return new String(this._signature);
+                return this._signature;
             }
         
             get timestamp() {
-                return new Number(this._timestamp);
+                return this._timestamp;
+            }
+            
+            get owner() {
+                return this._owner;
             }
         
             get block() {
@@ -44,7 +49,15 @@ module.exports = {
                     payloadLength: block._payloadLength,
                     metadata: block._metadata,
                     metadataLength: block._metadataLength,
+                    owner: block._owner,
                 };
+            }
+            
+            verify() {
+                // this is a stub, will need to verify using the following 
+                // set: PK (owner), hash, signature
+                
+                return true;
             }
         
         },
@@ -52,6 +65,6 @@ module.exports = {
         info: 0,
         service: 1,
     },
-}
+};
 
 
