@@ -13,6 +13,9 @@ module.exports = class Chain {
         this._creator = creatorPublicKey;
         this._nonce = crypto.randomBytes(32).toString('hex');
         this._hash = this.computeHash();
+        this._allowedAdministrators.push(creatorPublicKey);
+        this._allowedReaders.push(creatorPublicKey);
+        this._allowedWriters.push(creatorPublicKey);
     }
 
     computeHash() {
