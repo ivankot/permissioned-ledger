@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/ivankot/permissioned-ledger#readme",
   "dependencies": {
-    "basic-logger": "^0.4.4"
+    "basic-logger": "^0.4.4",
+    "commander": "^2.15.0"
   }
 }
