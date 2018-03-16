@@ -1,17 +1,21 @@
+const chainCrypto = require('./chain-crypto');
+const crypto = require('crypto');
+
 module.exports = {
     Entry: class Entry {
 
             constructor(type, metadata, payload, signature, owner) {
                 this._type = type;
+                this._nonce = crypto.randomBytes(32).toString('hex');
                 this._prevHash = "";
-                this._hash = "";
-                this._timestamp = "";
+                this._timestamp = new Date().getTime();
                 this._signature = signature;
                 this._payload = payload;
                 this._payloadLength = payload.length;
                 this._metadata = metadata;
                 this._metadataLength = metadata.length;
                 this._owner = owner;
+                this._hash = this._calculateHash();
             }
         
             set prevHash(prevHash) {
@@ -19,7 +23,7 @@ module.exports = {
             }
         
             get hash() {
-                return this._hash;
+                return this._calculateHash();
             }
 
             get type() {
@@ -52,12 +56,25 @@ module.exports = {
                     owner: block._owner,
                 };
             }
+
             
             verify() {
-                // this is a stub, will need to verify using the following 
-                // set: PK (owner), hash, signature
-                
-                return true;
+                return chainCrypto
+                    .verify(
+                        this.signature, 
+                        this.hash, 
+                        this.owner
+                    );
+            }
+
+            _calculateHash() {
+                return chainCrypto.hash(
+                    this._nonce,
+                    this._timestamp,
+                    this._payload,
+                    this._metadata,
+                    this._owner
+                );
             }
         
         },
