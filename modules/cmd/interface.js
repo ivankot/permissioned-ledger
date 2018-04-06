@@ -5,13 +5,13 @@ module.exports = class Interface {
     constructor(args) {
         this._program = require('commander');
         this._program
-            .version(VERSION)
+            .version(VERSION, '-v, --version')
             .option('-b, --bootstrap', 'Bootstrap server: generate keys and config and store them locally')
             .option('-g, --generate', 'Bootstrap client: generate keys and store them locally')
-            .option('-s, --server [command]', 'Control server: start, stop, status')
+            .option('-s, --server <command>', 'Control server: start, stop, status')
             .option('-v, --version', 'Print version and exit')
-            .option('-c, --connect [address:port]', 'Connect to server @ address:port')
-            .option('-k, --key [keyfile]', 'Key to use when connecting and working with the ledger')
+            .option('-c, --connect <address:port>', 'Connect to server @ address:port')
+            .option('-k, --key <keyfile>', 'Key to use when connecting and working with the ledger')
             .option('-m, --message [message]', 'Message to send via the client to server')
             .parse(args);
         this._handlers = new Map();
