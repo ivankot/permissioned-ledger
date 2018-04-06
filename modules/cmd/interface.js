@@ -45,16 +45,6 @@ module.exports = class Interface {
         let handler = this._defaultHandler;
         let args = new Map();
 
-
-        console.log('LOGGING');
-        console.log('bootstrap: %o', this._program.bootstrap);
-        console.log('generate: %o', this._program.generate);
-        console.log('server: %o', this._program.server);
-        console.log('connect: %o', this._program.connect);
-        console.log('key: %o', this._program.key);
-        console.log('message: %o', this._program.message);
-        console.log('FINISHED LOGGING');
-
         if (this._program.bootstrap && this._handlers.has('bootstrap')) {
             handler = this._handlers.get('bootstrap');
         }
