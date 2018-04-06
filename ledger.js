@@ -1,28 +1,20 @@
 const Logger = require('basic-logger');
 
 const { generateKeys } = require('./modules/core/chain-crypto');
+const Interface = require('./modules/cmd/interface');
 
 const loggerConfig = {
     showMillis: false,
     showTimestamp: true,
 };
 
-const {Entry, EntryType} = require('./modules/core/entry');
-const Chain = require('./modules/core/chain')
+const LOG = new Logger(loggerConfig);
+
+LOG.info('ledger started');
+
+const iface = new Interface(process.argv);
+iface.processArguments();
+
+LOG.info('ledger finished');
 
 
-let entry = new Entry(EntryType.info, "asd", "dsa", "sss");
-let chain = new Chain('test', 'asdasdasd');
-
-let keys = generateKeys();
-
-console.log(keys.publicKey);
-console.log(keys.privateKey);
-
-// console.log(entry);
-// console.log(chain);
-// console.log(chain.computeHash());
-
-var logger = new Logger(loggerConfig);
-
-logger.info('Starting the sample chain');
